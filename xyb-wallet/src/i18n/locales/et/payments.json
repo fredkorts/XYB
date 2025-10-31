@@ -1,0 +1,10 @@
+{
+  "date": "Kuupäev",
+  "type": "Tüüp",
+  "amount": "Summa",
+  "status": "Olek",
+  "status": { "pending": "Töös", "failed": "Ebaõnnestus", "completed": "Lõpetatud" },
+  "type": { "topup": "Laadimine", "debit": "Mahavõtt" },
+  "empty": "Tehinguid pole",
+  "loadError": "Tehingute laadimine ebaõnnestus"
+}
