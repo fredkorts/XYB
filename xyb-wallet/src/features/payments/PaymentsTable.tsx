@@ -1,10 +1,9 @@
-import { Table, Alert } from 'antd'
-import type { ColumnsType } from 'antd/es/table'
+import { Card, Alert, Pagination, Empty, Skeleton } from 'antd'
 import { useState } from 'react'
 import { usePayments } from './usePayments'
-import type { Payment } from '../../lib/api'
 import { useTranslation } from 'react-i18next'
 import { formatDateTime, formatMoneyEUR } from '../../lib/format'
+import './PaymentsTable.css'
 
 export function PaymentsTable() {
   const { t, i18n } = useTranslation('payments')
@@ -13,29 +12,56 @@ export function PaymentsTable() {
   const offset = (page - 1) * pageSize
   const { data, isLoading, isError, error } = usePayments(pageSize, offset)
 
-  const columns: ColumnsType<Payment> = [
-    { title: t('date'), dataIndex: 'timestamp', key: 'date', render: (v: string) => formatDateTime(v, i18n.language) },
-    { title: t('type'), dataIndex: 'type', key: 'type', render: (v: Payment['type']) => t(`type.${v}`) },
-    { title: t('amount'), dataIndex: 'amount', key: 'amount', render: (n: number) => formatMoneyEUR(n, i18n.language) },
-    { title: t('description'), dataIndex: 'description', key: 'description', render: (desc?: string) => desc || '-' },
-  ]
-
   if (isError) return <Alert type="error" showIcon role="alert" message={t('loadError')} description={(error as Error)?.message} />
 
+  if (!isLoading && (!data?.transactions?.length)) {
+    return <Empty description={t('empty')} />
+  }
+
   return (
-    <Table
-      rowKey={(r) => r.id}
-      loading={isLoading}
-      columns={columns}
-      dataSource={data?.transactions ?? []}
-      pagination={{
-        current: page,
-        total: data?.total ?? 0,
-        pageSize,
-        onChange: (p) => setPage(p),
-        showSizeChanger: false,
-      }}
-      locale={{ emptyText: t('empty') }}
-    />
+    <div className="payments-container">
+      <div className="payments-grid">
+        {isLoading ? (
+          // Loading skeleton cards
+          Array.from({ length: 3 }).map((_, index) => (
+            <Card key={index} className="payment-card">
+              <Skeleton active />
+            </Card>
+          ))
+        ) : (
+          data?.transactions?.map((payment) => (
+            <Card key={payment.id} className="payment-card">
+              <div className="payment-header">
+                <span className="payment-type">
+                  {t(`type.${payment.type}`)}
+                </span>
+                <span className={`payment-amount ${payment.type === 'payment' ? 'negative' : 'positive'}`}>
+                  {payment.type === 'payment' ? '-' : '+'}{formatMoneyEUR(payment.amount, i18n.language)}
+                </span>
+              </div>
+              <div className="payment-details">
+                <div className="payment-date">{formatDateTime(payment.timestamp, i18n.language)}</div>
+                {payment.description && (
+                  <div className="payment-description">
+                    {payment.description}
+                  </div>
+                )}
+              </div>
+            </Card>
+          ))
+        )}
+      </div>
+      
+      {data && (
+        <Pagination
+          current={page}
+          total={data.total}
+          pageSize={pageSize}
+          onChange={setPage}
+          showSizeChanger={false}
+          className="payments-pagination"
+        />
+      )}
+    </div>
   )
 }
