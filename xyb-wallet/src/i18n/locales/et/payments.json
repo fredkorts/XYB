@@ -2,9 +2,16 @@
   "date": "Kuupäev",
   "type": "Tüüp",
   "amount": "Summa",
-  "status": "Olek",
-  "status": { "pending": "Töös", "failed": "Ebaõnnestus", "completed": "Lõpetatud" },
-  "type": { "topup": "Laadimine", "debit": "Mahavõtt" },
+  "description": "Kirjeldus",
+  "status": {
+    "pending": "Töös",
+    "failed": "Ebaõnnestus",
+    "completed": "Lõpetatud"
+  },
+  "types": {
+    "topup": "Laadimine",
+    "payment": "Makse"
+  },
   "empty": "Tehinguid pole",
   "loadError": "Tehingute laadimine ebaõnnestus"
 }

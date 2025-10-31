@@ -33,7 +33,7 @@ export function PaymentsTable() {
             <Card key={payment.id} className="payment-card">
               <div className="payment-header">
                 <span className="payment-type">
-                  {t(`type.${payment.type}`)}
+                  {t(`types.${payment.type}`)}
                 </span>
                 <span className={`payment-amount ${payment.type === 'payment' ? 'negative' : 'positive'}`}>
                   {payment.type === 'payment' ? '-' : '+'}{formatMoneyEUR(payment.amount, i18n.language)}

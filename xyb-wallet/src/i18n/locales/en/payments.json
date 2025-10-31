@@ -1,10 +1,17 @@
 {
   "date": "Date",
-  "type": "Type",
+  "type": "Type", 
   "amount": "Amount",
-  "status": "Status",
-  "status": { "pending": "Pending", "failed": "Failed", "completed": "Completed" },
-  "type": { "topup": "Top-up", "debit": "Debit" },
+  "description": "Description",
+  "status": {
+    "pending": "Pending",
+    "failed": "Failed", 
+    "completed": "Completed"
+  },
+  "types": {
+    "topup": "Top-up",
+    "payment": "Payment"
+  },
   "empty": "No transactions yet",
   "loadError": "Could not load transactions"
 }
