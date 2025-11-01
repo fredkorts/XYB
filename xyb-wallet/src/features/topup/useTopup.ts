@@ -22,7 +22,7 @@ export const useTopup = () => {
           transactions: [
             { 
               id: `optimistic-${Date.now()}`, 
-              accountNumber: prevBalance?.accountNumber || 'ACC-2025-001',
+              accountNumber: prevBalance?.accountNumber || 'ACC123',
               type: 'topup', 
               amount, 
               currency: prevBalance?.currency || 'USD',
