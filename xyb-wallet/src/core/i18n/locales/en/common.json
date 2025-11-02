@@ -1,0 +1,15 @@
+{
+  "appTitle": "XYB Wallet",
+  "footer": "Demo app for the XYB assignment",
+  "hello": "Hello!",
+  "theme": {
+    "dark": "Dark",
+    "light": "Light",
+    "darkMode": "Dark mode",
+    "lightMode": "Light mode",
+    "toggle": "Toggle color theme"
+  },
+  "skipToContent": "Skip to main content",
+  "accountOverview": "Account overview",
+  "recentActivity": "Recent activity"
+}

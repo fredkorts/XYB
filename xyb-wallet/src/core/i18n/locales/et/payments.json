@@ -1,0 +1,23 @@
+{
+  "date": "Kuupäev",
+  "type": "Tüüp",
+  "amount": "Summa",
+  "description": "Kirjeldus",
+  "status": {
+    "pending": "Ootel",
+    "failed": "Ebaõnnestus",
+    "completed": "Lõpetatud"
+  },
+  "types": {
+    "topup": "Laadimine",
+    "payment": "Makse"
+  },
+  "amountSigns": {
+    "positive": "Laekumine",
+    "negative": "Mahakandmine"
+  },
+  "amountAnnounce": "{{sign}} {{amount}} — {{type}}",
+  "paginationLabel": "Lehitse tehinguid",
+  "empty": "Tehinguid veel pole",
+  "loadError": "Tehinguid ei õnnestunud laadida"
+}

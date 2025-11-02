@@ -1,0 +1,106 @@
+.container {
+  width: 100%;
+}
+
+.amountButton {
+  cursor: pointer;
+  border: 2px dashed var(--app-border);
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+  padding: 1rem;
+  width: 100%;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  transition: border-color 0.2s ease;
+}
+
+.amountButton:hover,
+.amountButton:focus-visible {
+  border-color: var(--color-secondary);
+}
+
+.amountInput {
+  width: 100%;
+}
+
+.quickButtons {
+  width: 100%;
+  justify-content: center;
+  flex-wrap: nowrap !important;
+}
+
+.quickButtons :global(.ant-space-item) {
+  flex: 1 1 auto;
+}
+
+.quickButton {
+  flex: 1 1 auto;
+}
+
+.toggleButton {
+  margin-top: 1.5rem;
+  padding: 1.35rem 1rem;
+  width: 100%;
+}
+
+
+.actionButtons {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.primaryAction {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-button-text-light);
+}
+
+.primaryAction:hover,
+.primaryAction:focus {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  color: var(--color-button-text-light);
+}
+
+.secondaryAction {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+  color: var(--color-button-text-light);
+}
+
+.secondaryAction:hover,
+.secondaryAction:focus {
+  background-color: var(--color-secondary-hover);
+  border-color: var(--color-secondary-hover);
+  color: var(--color-button-text-light);
+}
+
+.dangerAction {
+  background-color: var(--color-cancel);
+  border-color: var(--color-cancel);
+  color: var(--color-button-text-light);
+}
+
+.dangerAction:hover,
+.dangerAction:focus {
+  background-color: var(--color-cancel-hover);
+  border-color: var(--color-cancel-hover);
+  color: var(--color-button-text-light);
+}
+
+.amountStatistic :global(.ant-statistic-content),
+.amountStatistic :global(.ant-statistic-title) {
+  text-align: center;
+}
+
+.amountStatistic :global(.ant-statistic-content-value) {
+  color: var(--app-text);
+  font-size: 3rem;
+}
+
+.helperText {
+  font-size: 0.875rem;
+  color: var(--app-text);
+  opacity: 0.7;
+}

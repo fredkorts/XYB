@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { api } from '../../lib/api'
-import type { Payment } from '../../lib/api'
+import { api } from '../../core/lib/api'
+import type { Payment } from '../../core/lib/api'
 
 export const useTopup = () => {
   const qc = useQueryClient()

@@ -1,0 +1,16 @@
+.balanceStatistic :global(.ant-statistic-content) {
+  text-align: center;
+}
+
+.balanceStatistic :global(.ant-statistic-content-value) {
+  color: var(--app-text);
+  font-size: 3rem;
+}
+
+.todaysAdditions {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--color-positive);
+  font-weight: 600;
+  text-align: center;
+}
