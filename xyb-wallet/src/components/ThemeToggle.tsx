@@ -1,12 +1,12 @@
 import { Switch, Tooltip } from 'antd'
 import { MoonOutlined, SunOutlined } from '@ant-design/icons'
-import { useThemeMode } from '../app/providers/useThemeMode'
+import { useThemeMode } from '../core/providers/useThemeMode'
 import { useTranslation } from 'react-i18next'
 
 export function ThemeToggle() {
   const { mode, toggle } = useThemeMode()
   const { t } = useTranslation('common')
-  
+
   return (
     <Tooltip title={mode === 'dark' ? t('theme.dark') : t('theme.light')}>
       <Switch

@@ -1,0 +1,129 @@
+.container {
+  padding: var(--space-4);
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.paymentCard {
+  transition: box-shadow 0.2s ease;
+}
+
+.paymentCardTopup :global(.ant-card-body) {
+  border-left: 4px solid var(--color-positive);
+}
+
+.paymentCardPayment :global(.ant-card-body) {
+  border-left: 4px solid var(--color-negative);
+}
+
+.paymentCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+:root[data-theme="dark"] .paymentCard:hover {
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+.paymentCardContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.paymentLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--app-bg-secondary);
+  flex-shrink: 0;
+  font-size: 18px;
+  color: var(--color-secondary);
+}
+
+.paymentDetails {
+  flex: 1;
+  font-size: 14px;
+  color: var(--app-text);
+}
+
+.paymentTypeLabel {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.paymentDate {
+  margin-bottom: 4px;
+  opacity: 0.7;
+}
+
+.paymentDescription {
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.paymentHeader {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.paymentAmount {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.paymentAmountPositive {
+  color: var(--color-positive);
+}
+
+.paymentAmountNegative {
+  color: var(--color-negative);
+}
+
+.pagination {
+  text-align: center;
+  margin-top: var(--space-4);
+}
+
+.pagination :global(.ant-pagination) {
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: calc(var(--space-4) * 1.5);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-4);
+    margin-bottom: calc(var(--space-4) * 2);
+  }
+
+  .paymentAmount {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: calc(var(--space-4) * 2);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: calc(var(--space-4) + var(--space-2));
+  }
+}

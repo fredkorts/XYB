@@ -1,31 +1,40 @@
-:root {
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --app-bg: #ffffff;
-  --app-text: #0e1013;
-  --app-border: #efe8e8;
-  
-  /* Button Colors */
-  --color-primary: #00B894;
-  --color-primary-hover: #009A7D;
-  --color-secondary: #00BFFF;
-  --color-secondary-hover: #00A6E6;
-  --color-cancel: #D63031;
-  --color-cancel-hover: #B92A2B;
-  --color-button-text-light: #ffffff;
-}
-:root[data-theme="dark"] {
-  --app-bg: #353B48;
-  --app-text: #e8eaf0;
+@import './styles/tokens.css';
 
-  --color-primary: #0e997d;
-  --color-cancel: #ce4725;
+html,
+body,
+#root {
+  height: 100%;
 }
-html, body, #root { height: 100%; }
-html, body { margin: 0; background: var(--app-bg); color: var(--app-text); }
-* { box-sizing: border-box; }
-.app { min-height: 100dvh; display: grid; grid-template-rows: auto 1fr auto; }
-.header,.footer { padding: var(--space-3) var(--space-4); }
-.main { padding: var(--space-4); display: grid; gap: var(--space-4); grid-template-columns: 1fr; align-items: start; }
-@media (min-width: 720px) {.main { grid-template-columns: 1fr 2fr; }}
+
+body {
+  margin: 0;
+  background: var(--app-bg);
+  color: var(--app-text);
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+}
+
+a:focus-visible,
+button:focus-visible,
+[role='button']:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring-shadow);
+}
+
+:where(.ant-btn):focus-visible {
+  box-shadow: var(--focus-ring-shadow), var(--focus-ring-shadow);
+}

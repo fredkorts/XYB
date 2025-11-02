@@ -1,17 +1,23 @@
 {
   "date": "Date",
-  "type": "Type", 
+  "type": "Type",
   "amount": "Amount",
   "description": "Description",
   "status": {
     "pending": "Pending",
-    "failed": "Failed", 
+    "failed": "Failed",
     "completed": "Completed"
   },
   "types": {
     "topup": "Top-up",
     "payment": "Payment"
   },
+  "amountSigns": {
+    "positive": "Credit",
+    "negative": "Debit"
+  },
+  "amountAnnounce": "{{sign}} {{amount}} — {{type}}",
+  "paginationLabel": "Paginate through wallet activity",
   "empty": "No transactions yet",
   "loadError": "Could not load transactions"
 }

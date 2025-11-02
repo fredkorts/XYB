@@ -1,0 +1,19 @@
+{
+  "amountLabel": "Laadimise summa (EUR)",
+  "amountPlaceholder": "Sisesta summa",
+  "submit": "Lae raha",
+  "topupError": "Laadimine ebaõnnestus",
+  "errors": {
+    "required": "Summa on kohustuslik"
+  },
+  "minAmount": "Sisesta vähemalt 0.01",
+  "clear": "Tühjenda",
+  "cancel": "Tühista",
+  "topupSuccess": "Laadimine õnnestus!",
+  "topupSuccessDescription": "{{amount}} lisati teie kontole",
+  "editAmount": "Muuda summat",
+  "amountHint": "Vali kiirsumma või sisesta oma summa.",
+  "quickAmountLabel": "Lisa {{amount}} laadimissummale",
+  "clearAmount": "Tühjenda sisestatud summa",
+  "cancelTopup": "Sulge laadimisvorm"
+}

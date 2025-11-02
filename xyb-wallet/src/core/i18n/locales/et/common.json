@@ -1,0 +1,15 @@
+{
+  "appTitle": "XYB Rahakott",
+  "footer": "Demo rakendus XYB ülesande jaoks",
+  "hello": "Tere!",
+  "theme": {
+    "dark": "Tume",
+    "light": "Hele",
+    "darkMode": "Tume režiim",
+    "lightMode": "Hele režiim",
+    "toggle": "Värviteema vahetamine"
+  },
+  "skipToContent": "Liigu põhisisu juurde",
+  "accountOverview": "Konto ülevaade",
+  "recentActivity": "Viimane aktiivsus"
+}

@@ -2,8 +2,8 @@ import { Card, Skeleton, Statistic, Button, Space } from 'antd'
 import { useBalance } from './useBalance'
 import { useTodaysTopups } from './useTodaysTopups'
 import { useTranslation } from 'react-i18next'
-import { formatMoneyEUR } from '../../lib/format'
-import './BalanceCard.css'
+import { formatMoneyEUR } from '../../core/lib/format'
+import styles from './BalanceCard.module.css'
 
 export function BalanceCard() {
   const { t, i18n } = useTranslation('balance')
@@ -11,7 +11,7 @@ export function BalanceCard() {
   const { data: todaysTopups } = useTodaysTopups()
 
   return (
-    <Card title={t('current')}>
+    <Card title={t('current')} aria-live="polite">
       <Skeleton loading={isLoading} active>
         {isError ? (
           <Space direction="vertical">
@@ -20,9 +20,12 @@ export function BalanceCard() {
           </Space>
         ) : (
           <div>
-            <Statistic value={formatMoneyEUR(data?.balance ?? 0, i18n.language)} />
+            <Statistic
+              value={formatMoneyEUR(data?.balance ?? 0, i18n.language)}
+              className={styles.balanceStatistic}
+            />
             {todaysTopups && todaysTopups.totalAmount > 0 && (
-              <div className="balance-card-today-additions">
+              <div className={styles.todaysAdditions}>
                 +{formatMoneyEUR(todaysTopups.totalAmount, i18n.language)} {t('todayAdditions')}
               </div>
             )}
