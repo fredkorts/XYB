@@ -1,7 +1,7 @@
 {
   "amountLabel": "Top-up amount (EUR)",
   "amountPlaceholder": "Enter amount",
-  "submit": "Top up",
+  "submit": "Confirm",
   "topupError": "Top-up failed",
   "errors": {
     "required": "Amount is required"

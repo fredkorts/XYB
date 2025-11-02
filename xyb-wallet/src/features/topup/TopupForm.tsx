@@ -4,6 +4,7 @@ import { useTopup } from './useTopup'
 import { useId, useState } from 'react'
 import { formatMoneyEUR } from '../../core/lib/format'
 import styles from './TopupForm.module.css'
+import { CheckOutlined, DeleteOutlined } from '@ant-design/icons'
 
 interface TopupFormProps {
   showForm?: boolean
@@ -134,26 +135,27 @@ export function TopupForm({ showForm: externalShowForm, onShowFormChange }: Topu
                 +{formatMoneyEUR(quickAmount, i18n.language)}
               </Button>
             ))}
+          </Space>
+
+          <Space className={styles.actionButtons}>
             <Button
               onClick={handleClear}
               className={styles.dangerAction}
               disabled={isPending}
+              icon={<DeleteOutlined />}
               aria-label={t('clearAmount')}
             >
               {t('clear')}
             </Button>
-          </Space>
-
-          <Space className={styles.actionButtons}>
             <Button
               type="primary"
               onClick={handleSubmit}
               className={styles.primaryAction}
               loading={isPending}
               disabled={amount <= 0}
-              block
+              icon={<CheckOutlined />}
             >
-              {t('submit')} {amount > 0 && formatMoneyEUR(amount, i18n.language)}
+              {t('submit')}
             </Button>
           </Space>
 

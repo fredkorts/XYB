@@ -50,6 +50,14 @@
   justify-content: space-between;
 }
 
+.actionButtons :global(.ant-space-item) {
+  flex: 1 1 auto;
+}
+
+.actionButtons :global(.ant-space-item:first-child) {
+  margin-right: var(--space-2);
+}
+
 .primaryAction {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
