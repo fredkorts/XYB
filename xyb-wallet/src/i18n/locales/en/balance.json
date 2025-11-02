@@ -1,1 +1,1 @@
-{ "title": "Wallet balance", "current": "Current balance", "refresh": "Refresh", "retry": "Retry", "loadError": "Could not load balance" }
+{ "title": "Wallet balance", "current": "Current balance", "refresh": "Refresh", "retry": "Retry", "loadError": "Could not load balance", "todayAdditions": "added today" }

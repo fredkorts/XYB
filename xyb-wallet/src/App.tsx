@@ -1,13 +1,16 @@
-import { Layout, Space, Typography, Divider } from 'antd'
+import { Layout, Space, Typography } from 'antd'
 import { ThemeToggle } from './components/ThemeToggle'
 import { LanguageSelect } from './components/LanguageSelect'
 import { BalanceCard } from './features/balance/BalanceCard'
 import { TopupForm } from './features/topup/TopupForm'
 import { PaymentsTable } from './features/payments/PaymentsTable'
 import { useTranslation } from 'react-i18next'
+import { useState } from 'react'
 
 export default function App() {
   const { t } = useTranslation('common')
+  const [showTopupForm, setShowTopupForm] = useState(false)
+  
   return (
     <Layout className="app">
       <header className="header">
@@ -18,10 +21,21 @@ export default function App() {
       </header>
 
       <main className="main">
-        <section>
-          <BalanceCard />
-          <Divider style={{ margin: 0 }} />
-          <TopupForm />
+        <section style={{ paddingTop: '2rem' }}>
+          {!showTopupForm ? (
+            <>
+              <BalanceCard />
+              <TopupForm 
+                showForm={showTopupForm} 
+                onShowFormChange={setShowTopupForm} 
+              />
+            </>
+          ) : (
+            <TopupForm 
+              showForm={showTopupForm} 
+              onShowFormChange={setShowTopupForm} 
+            />
+          )}
         </section>
         <section>
           <PaymentsTable />

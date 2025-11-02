@@ -10,6 +10,7 @@ export const useTopup = () => {
       await Promise.all([
         qc.cancelQueries({ queryKey: ['balance'] }),
         qc.cancelQueries({ queryKey: ['payments'] }),
+        qc.cancelQueries({ queryKey: ['todaysTopups'] }),
       ])
       const prevBalance = qc.getQueryData<{ accountNumber: string; balance: number; currency: string }>(['balance'])
       const key = ['payments', { limit: 10, offset: 0 }] as const
@@ -44,6 +45,7 @@ export const useTopup = () => {
     onSettled: () => {
       qc.invalidateQueries({ queryKey: ['balance'] })
       qc.invalidateQueries({ queryKey: ['payments'] })
+      qc.invalidateQueries({ queryKey: ['todaysTopups'] })
     },
   })
 }

@@ -1,1 +1,1 @@
-{ "amountLabel": "Top-up amount (EUR)", "amountPlaceholder": "Enter amount", "submit": "Top up", "topupError": "Top-up failed", "errors": { "required": "Amount is required" }, "minAmount": "Enter at least 0.01" }
+{ "amountLabel": "Top-up amount (EUR)", "amountPlaceholder": "Enter amount", "submit": "Top up", "topupError": "Top-up failed", "errors": { "required": "Amount is required" }, "minAmount": "Enter at least 0.01", "clear": "Clear", "cancel": "Cancel", "topupSuccess": "Top-up successful!", "topupSuccessDescription": "{{amount}} has been added to your account" }

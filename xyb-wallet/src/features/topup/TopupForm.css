@@ -1,0 +1,90 @@
+.topup-form-container {
+  width: 100%;
+}
+
+.topup-form-amount-clickable {
+  cursor: pointer;
+  border-bottom: 2px dashed var(--app-border);
+  margin-bottom: 0.5rem;
+}
+
+.topup-form-amount-input {
+  width: 100%;
+}
+
+.topup-form-quick-buttons {
+  width: 100%;
+  justify-content: center;
+  flex-wrap: nowrap !important;
+
+  .topup-form-quick-button {
+    flex: 1 1 auto;
+  }
+}
+
+.topup-form-toggle-button {
+  margin-top: 1.5rem;
+  padding: 1.35rem 1rem;
+  width: 100%;
+}
+
+.topup-form-toggle-button + .ant-card {
+  margin-top: 1rem;
+}
+
+.topup-form-action-buttons {
+  width: 100%;
+  justify-content: space-between;
+}
+
+/* Button color classes */
+.primary {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.primary:hover {
+  background-color: var(--color-primary-hover) !important;
+  border-color: var(--color-primary-hover) !important;
+}
+
+.primary:focus {
+  background-color: var(--color-primary-hover) !important;
+  border-color: var(--color-primary-hover) !important;
+}
+
+.secondary {
+  background-color: var(--color-secondary) !important;
+  border-color: var(--color-secondary) !important;
+  color: var(--color-button-text-light) !important;
+}
+
+.secondary:hover {
+  background-color: var(--color-secondary-hover) !important;
+  border-color: var(--color-secondary-hover) !important;
+  color: var(--color-button-text-light) !important;
+}
+
+.secondary:focus {
+  background-color: var(--color-secondary-hover) !important;
+  border-color: var(--color-secondary-hover) !important;
+  color: var(--color-button-text-light) !important;
+}
+
+.cancel {
+  background-color: var(--color-cancel) !important;
+  border-color: var(--color-cancel) !important;
+  color: var(--color-button-text-light) !important;
+}
+
+.cancel:hover {
+  background-color: var(--color-cancel-hover) !important;
+  border-color: var(--color-cancel-hover) !important;
+  color: var(--color-button-text-light) !important;
+}
+
+.cancel:focus {
+  background-color: var(--color-cancel-hover) !important;
+  border-color: var(--color-cancel-hover) !important;
+  color: var(--color-button-text-light) !important;
+}

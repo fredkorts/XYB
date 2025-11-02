@@ -4,10 +4,23 @@
   --space-4: 16px;
   --app-bg: #ffffff;
   --app-text: #0e1013;
+  --app-border: #efe8e8;
+  
+  /* Button Colors */
+  --color-primary: #00B894;
+  --color-primary-hover: #009A7D;
+  --color-secondary: #00BFFF;
+  --color-secondary-hover: #00A6E6;
+  --color-cancel: #D63031;
+  --color-cancel-hover: #B92A2B;
+  --color-button-text-light: #ffffff;
 }
 :root[data-theme="dark"] {
-  --app-bg: #0b0d11;
+  --app-bg: #353B48;
   --app-text: #e8eaf0;
+
+  --color-primary: #0e997d;
+  --color-cancel: #ce4725;
 }
 html, body, #root { height: 100%; }
 html, body { margin: 0; background: var(--app-bg); color: var(--app-text); }

@@ -1,4 +1,5 @@
 import { Card, Alert, Pagination, Empty, Skeleton } from 'antd'
+import { WalletOutlined, UploadOutlined } from '@ant-design/icons'
 import { useState } from 'react'
 import { usePayments } from './usePayments'
 import { useTranslation } from 'react-i18next'
@@ -31,21 +32,29 @@ export function PaymentsTable() {
         ) : (
           data?.transactions?.map((payment) => (
             <Card key={payment.id} className="payment-card">
-              <div className="payment-header">
-                <span className="payment-type">
-                  {t(`types.${payment.type}`)}
-                </span>
-                <span className={`payment-amount ${payment.type === 'payment' ? 'negative' : 'positive'}`}>
-                  {payment.type === 'payment' ? '-' : '+'}{formatMoneyEUR(payment.amount, i18n.language)}
-                </span>
-              </div>
-              <div className="payment-details">
-                <div className="payment-date">{formatDateTime(payment.timestamp, i18n.language)}</div>
-                {payment.description && (
-                  <div className="payment-description">
-                    {payment.description}
-                  </div>
-                )}
+              <div className="payment-card-container">
+                <div className="payment-logo">
+                    <span className="payment-type">
+                      {payment.type === 'topup' ? (
+                        <WalletOutlined />
+                      ) : (
+                        <UploadOutlined />
+                      )}
+                    </span>
+                </div>
+                <div className="payment-details">
+                    <div className="payment-date">{formatDateTime(payment.timestamp, i18n.language)}</div>
+                    {payment.description && (
+                    <div className="payment-description">
+                        {payment.description}
+                    </div>
+                    )}
+                </div>
+                <div className="payment-header">
+                    <span className={`payment-amount ${payment.type === 'payment' ? 'negative' : 'positive'}`}>
+                    {payment.type === 'payment' ? '-' : '+'}{formatMoneyEUR(payment.amount, i18n.language)}
+                    </span>
+                </div>
               </div>
             </Card>
           ))

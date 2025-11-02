@@ -23,19 +23,68 @@
   box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1) !important;
 }
 
+.payment-card-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.payment-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--app-bg-secondary);
+  flex-shrink: 0;
+}
+
 .payment-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  margin-bottom: var(--space-2);
 }
 
 .payment-type {
   font-weight: 500;
   color: var(--app-text);
-  opacity: 0.7;
-  text-transform: capitalize;
-  font-size: 14px;
+  opacity: 0.8;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.payment-logo .payment-type {
+  color: #1890ff;
+}
+
+/* Different colors for different payment types */
+.payment-card:has(.payment-amount.positive) .payment-logo {
+  background-color: rgba(82, 196, 26, 0.1);
+}
+
+.payment-card:has(.payment-amount.positive) .payment-type {
+  color: var(--color-primary);
+}
+
+.payment-card:has(.payment-amount.negative) .payment-logo {
+  background-color: rgba(255, 77, 79, 0.1);
+}
+
+.payment-card:has(.payment-amount.negative) .payment-type {
+  color: var(--color-cancel);
+}
+
+/* Dark theme colors */
+:root[data-theme="dark"] .payment-card:has(.payment-amount.positive) .payment-type {
+  color: var(--color-primary);
+}
+
+:root[data-theme="dark"] .payment-card:has(.payment-amount.negative) .payment-type {
+  color: var(--color-cancel);
 }
 
 .payment-amount {
@@ -48,22 +97,23 @@
 }
 
 .payment-amount.negative {
-  color: #ff4d4f;
+  color: var(--color-cancel);
 }
 
 /* Dark theme amount colors */
 :root[data-theme="dark"] .payment-amount.positive {
-  color: #73d13d;
+  color: var(--color-primary);
 }
 
 :root[data-theme="dark"] .payment-amount.negative {
-  color: #ff7875;
+  color: var(--color-cancel);
 }
 
 .payment-details {
   font-size: 14px;
   color: var(--app-text);
   opacity: 0.6;
+  flex: 1;
 }
 
 .payment-date {
