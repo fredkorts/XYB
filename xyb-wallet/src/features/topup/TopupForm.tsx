@@ -19,13 +19,19 @@ export function TopupForm({ showForm: externalShowForm, onShowFormChange }: Topu
   const [amount, setAmount] = useState(0)
   const [isEditing, setIsEditing] = useState(false)
   const amountInputId = useId()
+  const amountLabelId = useId()
+  const helperTextId = useId()
+  const amountStatusId = useId()
+  const announcementId = useId()
   const formSectionId = useId()
+  const [liveAnnouncement, setLiveAnnouncement] = useState('')
 
   const showForm = externalShowForm !== undefined ? externalShowForm : internalShowForm
   const setShowForm = onShowFormChange || setInternalShowForm
 
   const quickAmounts = [1, 5, 25, 100]
 
+  const formattedAmount = formatMoneyEUR(amount, i18n.language)
   const handleQuickAmount = (quickAmount: number) => {
     setAmount(prevAmount => prevAmount + quickAmount)
   }
@@ -39,10 +45,10 @@ export function TopupForm({ showForm: externalShowForm, onShowFormChange }: Topu
       try {
         await mutateAsync(amount)
 
-        notification.success({
+        notification.open({
           message: t('topupSuccess'),
           description: t('topupSuccessDescription', {
-            amount: formatMoneyEUR(amount, i18n.language)
+            amount: formattedAmount
           }),
           placement: 'topRight',
           duration: 3,
@@ -50,8 +56,10 @@ export function TopupForm({ showForm: externalShowForm, onShowFormChange }: Topu
           pauseOnHover: true,
           style: {
             borderRadius: '12px',
-          }
+          },
         })
+
+        setLiveAnnouncement(t('topupSuccessLive', { amount: formattedAmount }))
 
         setAmount(0)
         setShowForm(false)
@@ -77,113 +85,153 @@ export function TopupForm({ showForm: externalShowForm, onShowFormChange }: Topu
     setAmount(0)
     setShowForm(false)
     setIsEditing(false)
+    setLiveAnnouncement('')
   }
 
-  if (!showForm) {
-    return (
-      <Button
-        type="primary"
-        className={`${styles.toggleButton} ${styles.primaryAction}`}
-        onClick={() => setShowForm(true)}
-        block
-        aria-expanded={false}
-        aria-controls={formSectionId}
-      >
-        {t('topUpLabel')}
-      </Button>
-    )
+  const handleToggle = () => {
+    if (showForm) {
+      handleCancel()
+    } else {
+      setShowForm(true)
+    }
   }
 
   return (
     <>
-      <Card id={formSectionId} title={t('amountLabel')}>
-        <Space direction="vertical" className={styles.container}>
-          {isEditing ? (
-            <InputNumber
-              id={amountInputId}
-              value={amount}
-              onChange={handleAmountChange}
-              onBlur={handleAmountBlur}
-              onPressEnter={handleAmountBlur}
-              min={0}
-              step={0.01}
-              className={styles.amountInput}
-              aria-label={t('amountLabel')}
-              autoFocus
-            />
-          ) : (
-            <button
-              type="button"
-              className={styles.amountButton}
-              onClick={handleAmountClick}
-              aria-label={t('editAmount')}
-            >
-              <div className={styles.amountStatistic} aria-live="polite">
-                <Statistic value={formatMoneyEUR(amount, i18n.language)} />
-              </div>
-            </button>
-          )}
-
-          <span className={styles.helperText}>{t('amountHint')}</span>
-
-          <Space wrap className={styles.quickButtons}>
-            {quickAmounts.map(quickAmount => (
-              <Button
-                key={quickAmount}
-                className={`${styles.quickButton} ${styles.secondaryAction}`}
-                onClick={() => handleQuickAmount(quickAmount)}
-                disabled={isPending}
-                aria-label={t('quickAmountLabel', {
-                  amount: formatMoneyEUR(quickAmount, i18n.language)
-                })}
-              >
-                +{formatMoneyEUR(quickAmount, i18n.language)}
-              </Button>
-            ))}
-          </Space>
-
-          <Space className={styles.actionButtons}>
-            <Button
-              onClick={handleClear}
-              className={styles.dangerAction}
-              disabled={isPending}
-              icon={<DeleteOutlined />}
-              aria-label={t('clearAmount')}
-            >
-              {t('clear')}
-            </Button>
-            <Button
-              type="primary"
-              onClick={handleSubmit}
-              className={styles.primaryAction}
-              loading={isPending}
-              disabled={amount <= 0}
-              icon={<CheckOutlined />}
-            >
-              {t('submit')}
-            </Button>
-          </Space>
-
-          {isError && (
-            <Alert
-              type="error"
-              showIcon
-              role="alert"
-              message={t('topupError')}
-              description={(error as Error)?.message}
-            />
-          )}
-        </Space>
-      </Card>
       <Button
-        className={`${styles.toggleButton} ${styles.dangerAction}`}
-        onClick={handleCancel}
+        type="primary"
+        className={`${styles.toggleButton} ${styles.primaryAction}`}
+        onClick={handleToggle}
         block
-        icon={<CloseOutlined />}
-        aria-label={t('cancelTopup')}
+        aria-expanded={showForm}
+        aria-controls={formSectionId}
       >
-        {t('cancel')}
+        {showForm ? t('hideTopupLabel') : t('topUpLabel')}
       </Button>
+
+      <span
+        id={announcementId}
+        role="status"
+        aria-live="polite"
+        className={styles.visuallyHidden}
+      >
+        {liveAnnouncement}
+      </span>
+
+      {showForm && (
+        <>
+          <Card
+            id={formSectionId}
+            title={t('amountLabel')}
+            role="region"
+            aria-labelledby={amountLabelId}
+          >
+            <Space direction="vertical" className={styles.container}>
+              <label id={amountLabelId} htmlFor={amountInputId} className={styles.amountLabel}>
+                {t('amountLabel')}
+              </label>
+              <div
+                id={amountStatusId}
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+                className={styles.visuallyHidden}
+              >
+                {t('currentAmount', { amount: formattedAmount })}
+              </div>
+              {isEditing ? (
+                <InputNumber
+                  id={amountInputId}
+                  value={amount}
+                  onChange={handleAmountChange}
+                  onBlur={handleAmountBlur}
+                  onPressEnter={handleAmountBlur}
+                  min={0}
+                  step={0.01}
+                  className={styles.amountInput}
+                  aria-labelledby={amountLabelId}
+                  aria-describedby={`${amountStatusId} ${helperTextId}`}
+                  autoFocus
+                />
+              ) : (
+                <button
+                  type="button"
+                  className={styles.amountButton}
+                  onClick={handleAmountClick}
+                  aria-label={t('editAmount')}
+                  aria-describedby={`${amountStatusId} ${helperTextId}`}
+                >
+                  <div className={styles.amountStatistic} aria-hidden="true">
+                    <Statistic value={formattedAmount} aria-hidden />
+                  </div>
+                </button>
+              )}
+
+              <span id={helperTextId} className={styles.helperText}>
+                {t('amountHint')}
+              </span>
+
+              <Space wrap className={styles.quickButtons}>
+                {quickAmounts.map(quickAmount => (
+                  <Button
+                    key={quickAmount}
+                    className={`${styles.quickButton} ${styles.secondaryAction}`}
+                    onClick={() => handleQuickAmount(quickAmount)}
+                    disabled={isPending}
+                    aria-label={t('quickAmountLabel', {
+                      amount: formatMoneyEUR(quickAmount, i18n.language)
+                    })}
+                  >
+                    +{formatMoneyEUR(quickAmount, i18n.language)}
+                  </Button>
+                ))}
+              </Space>
+
+              <Space className={styles.actionButtons}>
+                <Button
+                  onClick={handleClear}
+                  className={styles.dangerAction}
+                  disabled={isPending}
+                  icon={<DeleteOutlined />}
+                  aria-label={t('clearAmount')}
+                >
+                  {t('clear')}
+                </Button>
+                <Button
+                  type="primary"
+                  onClick={handleSubmit}
+                  className={styles.primaryAction}
+                  loading={isPending}
+                  disabled={amount <= 0}
+                  icon={<CheckOutlined />}
+                  aria-label={t('submitAmount', { amount: formattedAmount })}
+                >
+                  {t('submit')}
+                </Button>
+              </Space>
+
+              {isError && (
+                <Alert
+                  type="error"
+                  showIcon
+                  role="alert"
+                  message={t('topupError')}
+                  description={(error as Error)?.message}
+                />
+              )}
+            </Space>
+          </Card>
+          <Button
+            className={`${styles.toggleButton} ${styles.dangerAction}`}
+            onClick={handleCancel}
+            block
+            icon={<CloseOutlined />}
+            aria-label={t('cancelTopup')}
+          >
+            {t('cancel')}
+          </Button>
+        </>
+      )}
     </>
   )
 }

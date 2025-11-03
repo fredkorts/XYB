@@ -26,17 +26,23 @@ export function PaymentsTable() {
   }
 
   if (!isLoading && (!data?.transactions?.length)) {
-    return <Empty description={t('empty')} />
+    return (
+      <div role="status" aria-live="polite">
+        <Empty description={t('empty')} />
+      </div>
+    )
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.grid}>
+    <div className={styles.container} aria-busy={isLoading}>
+      <ul className={styles.grid} role="list" aria-live="polite">
         {isLoading
           ? Array.from({ length: 3 }).map((_, index) => (
-              <Card key={index} className={styles.paymentCard}>
-                <Skeleton active />
-              </Card>
+              <li key={index} className={styles.listItem}>
+                <Card className={styles.paymentCard} aria-busy="true" aria-hidden="true">
+                  <Skeleton active />
+                </Card>
+              </li>
             ))
           : data?.transactions?.map((payment) => {
               const isPayment = payment.type === 'payment'
@@ -50,35 +56,60 @@ export function PaymentsTable() {
                 styles.paymentCard,
                 isPayment ? styles.paymentCardPayment : styles.paymentCardTopup,
               ].join(' ')
+              const baseId = `payment-${payment.id}`
+              const titleId = `${baseId}-title`
+              const dateId = `${baseId}-date`
+              const descriptionId = payment.description ? `${baseId}-description` : undefined
+              const amountId = `${baseId}-amount`
+              const describedBy = [dateId, descriptionId, amountId].filter(Boolean).join(' ')
 
               return (
-                <Card key={payment.id} className={cardClass}>
-                  <div className={styles.paymentCardContainer}>
-                    <div className={styles.paymentLogo} aria-hidden="true">
-                      <TypeIcon aria-hidden />
+                <li key={payment.id} className={styles.listItem}>
+                  <Card
+                    className={cardClass}
+                    role="group"
+                    tabIndex={0}
+                    aria-labelledby={titleId}
+                    aria-describedby={describedBy}
+                  >
+                    <div className={styles.paymentCardContainer}>
+                      <div className={styles.paymentLogo} aria-hidden="true">
+                        <TypeIcon aria-hidden />
+                      </div>
+                      <div className={styles.paymentDetails}>
+                        <div id={titleId} className={styles.paymentTypeLabel}>{typeLabel}</div>
+                        <div id={dateId} className={styles.paymentDate}>
+                          {formatDateTime(payment.timestamp, i18n.language)}
+                        </div>
+                        {payment.description && (
+                          <div id={descriptionId} className={styles.paymentDescription}>
+                            {payment.description}
+                          </div>
+                        )}
+                      </div>
+                      <div className={styles.paymentHeader}>
+                        <span
+                          id={amountId}
+                          className={amountClass}
+                          aria-label={t('amountAnnounce', {
+                            amount: formatMoneyEUR(payment.amount, i18n.language),
+                            type: typeLabel,
+                            sign: isPayment ? t('amountSigns.negative') : t('amountSigns.positive'),
+                          })}
+                        >
+                          {isPayment ? '-' : '+'}
+                          {formatMoneyEUR(payment.amount, i18n.language)}
+                          <span className={styles.visuallyHidden}>
+                            {isPayment ? t('amountSigns.negative') : t('amountSigns.positive')}
+                          </span>
+                        </span>
+                      </div>
                     </div>
-                    <div className={styles.paymentDetails}>
-                      <div className={styles.paymentTypeLabel}>{typeLabel}</div>
-                      <div className={styles.paymentDate}>{formatDateTime(payment.timestamp, i18n.language)}</div>
-                      {payment.description && (
-                        <div className={styles.paymentDescription}>{payment.description}</div>
-                      )}
-                    </div>
-                    <div className={styles.paymentHeader}>
-                      <span className={amountClass} aria-label={t('amountAnnounce', {
-                        amount: formatMoneyEUR(payment.amount, i18n.language),
-                        type: typeLabel,
-                        sign: isPayment ? t('amountSigns.negative') : t('amountSigns.positive'),
-                      })}>
-                        {isPayment ? '-' : '+'}
-                        {formatMoneyEUR(payment.amount, i18n.language)}
-                      </span>
-                    </div>
-                  </div>
-                </Card>
+                  </Card>
+                </li>
               )
             })}
-      </div>
+      </ul>
 
       {data && (
         <Pagination

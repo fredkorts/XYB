@@ -16,5 +16,9 @@
   "amountHint": "Vali kiirsumma või sisesta oma summa.",
   "quickAmountLabel": "Lisa {{amount}} laadimissummale",
   "clearAmount": "Tühjenda sisestatud summa",
-  "cancelTopup": "Sulge laadimisvorm"
+  "cancelTopup": "Sulge laadimisvorm",
+  "hideTopupLabel": "Peida laadimisvorm",
+  "currentAmount": "Praegune summa: {{amount}}",
+  "submitAmount": "Kinnita laadimine summas {{amount}}",
+  "topupSuccessLive": "Laadimine õnnestus. {{amount}} lisati teie kontole."
 }
