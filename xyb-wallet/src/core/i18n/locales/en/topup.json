@@ -16,5 +16,9 @@
   "amountHint": "Select a quick amount or enter a custom value.",
   "quickAmountLabel": "Add {{amount}} to the top-up amount",
   "clearAmount": "Clear the entered amount",
-  "cancelTopup": "Cancel the top-up form"
+  "cancelTopup": "Cancel the top-up form",
+  "hideTopupLabel": "Hide top-up form",
+  "currentAmount": "Current amount: {{amount}}",
+  "submitAmount": "Submit top-up of {{amount}}",
+  "topupSuccessLive": "Top-up successful. {{amount}} has been added to your account."
 }
