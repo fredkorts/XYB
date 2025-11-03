@@ -1,9 +1,10 @@
 :root {
+  --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
   --space-4: 16px;
 
-  --app-bg: #ffffff;
+  --app-bg: #ece9e9;
   --app-bg-secondary: #f5f7fb;
   --app-text: #0e1013;
   --app-border: #efe8e8;
@@ -17,6 +18,13 @@
   --color-button-text-light: #ffffff;
   --color-positive: #00b894;
   --color-negative: #d63031;
+  --color-positive-rgb: 0, 184, 148;
+  --color-negative-rgb: 214, 48, 49;
+
+  /* Shadow colors for button hover effects */
+  --color-primary-shadow: rgba(0, 184, 148, 0.3);
+  --color-secondary-shadow: rgba(0, 191, 255, 0.3);
+  --color-cancel-shadow: rgba(214, 48, 49, 0.3);
 
   --focus-ring-color: rgba(0, 184, 148, 0.3);
   --focus-ring-shadow: 0 0 0 3px var(--focus-ring-color);
@@ -36,6 +44,79 @@
   --color-cancel-hover: #a6381d;
   --color-positive: #2bd4af;
   --color-negative: #ff6f61;
+  --color-positive-rgb: 43, 212, 175;
+  --color-negative-rgb: 255, 111, 97;
+
+  /* Dark theme shadow colors for button hover effects */
+  --color-primary-shadow: rgba(14, 153, 125, 0.4);
+  --color-secondary-shadow: rgba(19, 151, 255, 0.4);
+  --color-cancel-shadow: rgba(206, 71, 37, 0.4);
 
   --focus-ring-color: rgba(19, 151, 255, 0.4);
+}
+
+/* Smooth notification animations */
+.ant-notification {
+  z-index: 1050;
+}
+
+.ant-notification-notice {
+  border-radius: 12px;
+  box-shadow: 0 6px 16px -8px rgba(0, 0, 0, 0.08), 0 9px 28px 0 rgba(0, 0, 0, 0.05), 0 3px 6px -4px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.ant-notification-notice-success {
+  background-color: rgba(var(--color-positive-rgb, 0, 184, 148), 0.05);
+  border: 1px solid rgba(var(--color-positive-rgb, 0, 184, 148), 0.15);
+}
+
+.ant-notification-notice-error {
+  background-color: rgba(var(--color-negative-rgb, 214, 48, 49), 0.05);
+  border: 1px solid rgba(var(--color-negative-rgb, 214, 48, 49), 0.15);
+}
+
+/* Enhanced slide-in animation */
+@keyframes notificationSlideInRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes notificationSlideOutRight {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.ant-notification-topRight .ant-notification-notice {
+  animation: notificationSlideInRight 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.ant-notification-topRight .ant-notification-notice.ant-notification-notice-close {
+  animation: notificationSlideOutRight 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* Hover effects */
+.ant-notification-notice:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.12), 0 12px 36px 0 rgba(0, 0, 0, 0.08), 0 4px 8px -4px rgba(0, 0, 0, 0.16);
+}
+
+/* Progress bar styling */
+.ant-notification-notice-with-progress .ant-notification-notice-progress {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  height: 3px;
+  border-radius: 2px;
 }

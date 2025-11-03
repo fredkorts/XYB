@@ -79,7 +79,16 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     <ThemeCtx.Provider value={{ mode, toggle: () => setMode(m => (m === 'dark' ? 'light' : 'dark')) }}>
       <ConfigProvider theme={{ algorithm, token }} locale={antdLocale}>
         <QueryClientProvider client={queryClient}>
-          <AntdApp>{children}</AntdApp>
+          <AntdApp 
+            notification={{
+              placement: 'topRight',
+              stack: { threshold: 3 },
+              showProgress: true,
+              pauseOnHover: true,
+            }}
+          >
+            {children}
+          </AntdApp>
         </QueryClientProvider>
       </ConfigProvider>
     </ThemeCtx.Provider>

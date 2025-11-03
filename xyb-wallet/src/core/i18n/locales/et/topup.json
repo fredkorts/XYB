@@ -1,6 +1,7 @@
 {
   "amountLabel": "Laadimise summa (EUR)",
   "amountPlaceholder": "Sisesta summa",
+  "topUpLabel": "Lae raha",
   "submit": "Kinnita",
   "topupError": "Laadimine ebaõnnestus",
   "errors": {

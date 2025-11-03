@@ -1,5 +1,7 @@
 .container {
   width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; /* Prevent horizontal overflow */
 }
 
 .amountButton {
@@ -9,10 +11,12 @@
   margin-bottom: 0.5rem;
   padding: 1rem;
   width: 100%;
+  max-width: 100%;
   background: transparent;
   color: inherit;
   text-align: left;
   transition: border-color 0.2s ease;
+  box-sizing: border-box; /* Ensure padding doesn't cause overflow */
 }
 
 .amountButton:hover,
@@ -28,14 +32,39 @@
   width: 100%;
   justify-content: center;
   flex-wrap: nowrap !important;
+  display: flex !important;
 }
 
 .quickButtons :global(.ant-space-item) {
   flex: 1 1 auto;
+  display: flex;
 }
 
 .quickButton {
   flex: 1 1 auto;
+  width: 100%;
+  min-width: 0; /* Allow buttons to shrink below their content width */
+  font-size: 0.875rem; /* Slightly smaller text on mobile */
+  padding: 0.5rem 0.25rem; /* Tighter padding on mobile */
+}
+
+/* Mobile responsive fixes */
+@media (max-width: 480px) {
+  .quickButtons {
+    flex-wrap: wrap !important;
+    gap: var(--space-2);
+  }
+  
+  .quickButtons :global(.ant-space-item) {
+    flex: 1 1 calc(50% - var(--space-1));
+    min-width: calc(50% - var(--space-1));
+  }
+  
+  .quickButton {
+    font-size: 0.75rem;
+    padding: 0.75rem 0.5rem;
+    min-width: 0;
+  }
 }
 
 .toggleButton {
@@ -47,11 +76,8 @@
 
 .actionButtons {
   width: 100%;
-  justify-content: space-between;
-}
-
-.actionButtons :global(.ant-space-item) {
-  flex: 1 1 auto;
+  justify-content: flex-end;
+  margin-top: 2rem;
 }
 
 .actionButtons :global(.ant-space-item:first-child) {
@@ -62,39 +88,48 @@
   background-color: var(--color-primary);
   border-color: var(--color-primary);
   color: var(--color-button-text-light);
+  transition: all 0.3s ease;
 }
 
 .primaryAction:hover,
 .primaryAction:focus {
-  background-color: var(--color-primary-hover);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
   border-color: var(--color-primary-hover);
   color: var(--color-button-text-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--color-primary-shadow);
 }
 
 .secondaryAction {
   background-color: var(--color-secondary);
   border-color: var(--color-secondary);
   color: var(--color-button-text-light);
+  transition: all 0.3s ease;
 }
 
 .secondaryAction:hover,
 .secondaryAction:focus {
-  background-color: var(--color-secondary-hover);
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-hover) 100%);
   border-color: var(--color-secondary-hover);
   color: var(--color-button-text-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--color-secondary-shadow);
 }
 
 .dangerAction {
   background-color: var(--color-cancel);
   border-color: var(--color-cancel);
   color: var(--color-button-text-light);
+  transition: all 0.3s ease;
 }
 
 .dangerAction:hover,
 .dangerAction:focus {
-  background-color: var(--color-cancel-hover);
+  background: linear-gradient(135deg, var(--color-cancel) 0%, var(--color-cancel-hover) 100%);
   border-color: var(--color-cancel-hover);
   color: var(--color-button-text-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--color-cancel-shadow);
 }
 
 .amountStatistic :global(.ant-statistic-content),
