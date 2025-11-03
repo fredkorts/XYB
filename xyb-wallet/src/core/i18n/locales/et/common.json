@@ -2,6 +2,7 @@
   "appTitle": "XYB Rahakott",
   "footer": "Demo rakendus XYB ülesande jaoks",
   "hello": "Tere!",
+  "language": "Keel",
   "theme": {
     "dark": "Tume",
     "light": "Hele",

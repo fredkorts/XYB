@@ -2,6 +2,7 @@
   "appTitle": "XYB Wallet",
   "footer": "Demo app for the XYB assignment",
   "hello": "Hello!",
+  "language": "Language",
   "theme": {
     "dark": "Dark",
     "light": "Light",
